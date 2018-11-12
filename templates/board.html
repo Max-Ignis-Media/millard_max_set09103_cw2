@@ -1,0 +1,27 @@
+<!doctype html>
+
+<body>
+<h1>{{board}}</h1>
+<div>
+<form method="POST" action="/{{board}}/post" enctype=multipart/form-data>
+	name:<input type="text" name="name"/><br/>
+	image:<input type=file name"image"><br/>
+	post:<textarea type="text" name="post_text"> </textarea><br/>
+	<input type="submit" value="post"/>
+</form>
+</div>
+<ul>
+      {% for post in posts %}
+      <div>
+	{% if post[1] %}
+        <a href="{{url_for('static',filename='uploads/'+post[1])}}"><img style="width:100px;" src="{{url_for('static',filename='uploads/'+post[1])}}" /></a>
+        {% endif %}	
+	user:{{post[2]}}<br/>
+	date:{{post[3]}}<br/>
+	Post:{{post[5]}}<br/>
+<a href="/{{board}}/reply/{{post[0]}}">Reply</a>
+</div>
+{% endfor %}
+</body>
+</html>
+
