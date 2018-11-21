@@ -48,7 +48,6 @@ def create_new_reply(request, reply_id):
     cur.close()
     return cur.lastrowid
 
-
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
@@ -102,6 +101,3 @@ def reply(board, post_id):
     print replies
     return render_template('reply.html', post=post[0], replies=replies, board=board)
    
-
-
- 
