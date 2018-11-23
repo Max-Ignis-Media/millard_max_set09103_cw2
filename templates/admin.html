@@ -1,0 +1,33 @@
+<!doctype html>
+<title>Admin Panel</title>
+<head>
+      <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" href="{{url_for('static',filename='materialize/css/materialize.min.css')}}"  media="screen,projection"/>
+      <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='style.css')}}">
+</head>
+<body>
+  <!--Import jQuery before materialize.js-->
+      <script type="text/javascript" src="{{url_for('static',filename='materialize/js/materialize.min.js')}}"></script>
+   <nav>
+  <div class="nav-wrapper purple darken-4">
+    <a href="/" class="brand-logo">4door</a>
+    <ul class="right hide-on-med-and-down">
+      <li><a href="/">Boards</a></li>
+        <li><a href="/" class="waves-effect waves-light btn">Admin logout</a></li>
+    </ul>
+  </div>
+</nav>
+ <h5>Admin Panel</h5>
+<h6> insert new board </h6>
+<div class="container">
+  <form method = "POST" action="/admin/post_newboard" enctype=multipart/form-data>
+    Board (format typically one or two letters):<input type="text" name="boardname"/><br/>
+    Board Description:<input type="text" name="description"/><br/>
+    <button class="btn waves-effect waves-light" type="submit" value="Post!">Submit</button>
+    </form>
+</div>
+
+</div>
+
+</body>
+

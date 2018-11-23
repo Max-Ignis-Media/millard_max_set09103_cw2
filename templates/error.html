@@ -1,6 +1,6 @@
 <!doctype html>
 <head>
-<title>4door</title>
+<title>4door error 404</title>
  <link type="text/css" rel="stylesheet" href="{{url_for('static',filename='materialize/css/materialize.min.css')}}"  media="screen,projection"/>
  <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='style.css')}}">
 </head>
@@ -18,16 +18,12 @@
 </nav>
 <br>
 <br>
-<div class="container">
-<div class="boardcontainer">
-<h4> Boards </h4>
 <br>
-<div class="boardlist">
-  {% for board in boards %}
-  <a href="/{{board[1]}}">{{board[1]}} - {{board[2]}}</a>
-  {% endfor %}
-</div>
-</div>
-</div>
-</body>
+<center>
+<h4> error 404 </h4>
+<button class="waves-effect waves-light btn-large" onclick="goBack()">Return to Previous page</button>
+
+<script>
+function goBack() {
+    window.history.back();
 

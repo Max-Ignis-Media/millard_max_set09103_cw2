@@ -1,21 +1,31 @@
 <!doctype html>
-<title>chan</title>
+<title>Replies</title>
 <head>
-  <!--Import Google Icon Font-->
-      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
       <!--Import materialize.css-->
       <link type="text/css" rel="stylesheet" href="{{url_for('static',filename='materialize/css/materialize.min.css')}}"  media="screen,projection"/>
+      <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='style.css')}}">
+
 </head>
 <body>
   <!--Import jQuery before materialize.js-->
-      <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
       <script type="text/javascript" src="{{url_for('static',filename='materialize/js/materialize.min.js')}}"></script>
-    
+   
+<nav>
+  <div class="nav-wrapper purple darken-4">
+    <a href="/" class="brand-logo">4door</a>
+    <ul class="right hide-on-med-and-down">
+      <li><a href="/">Boards</a></li>
+        <li><a href="/admin" class="waves-effect waves-light btn">Admin login</a></li>
+    </ul>
+  </div>
+</nav>
+ <div class="container">
+<h1>replying to user {{post[2]}}</h1>
   <form method = "POST" action="/{{board}}/post_reply/{{post[0]}}" enctype=multipart/form-data>
     Name:<input type="text" name="name"/><br/>
     Image:<input type=file name="image"/><br/>
     Post:<textarea type="text" name="post_text"></textarea><br/>
-    <input type="submit" value="Post!"/>
+    <button class="btn waves-effect waves light" type="submit">Post </button>
     </form>
   <ul>
   <div>
@@ -39,5 +49,5 @@
   {% endfor %}
   
   </ul>
-
+</div>
 </body>

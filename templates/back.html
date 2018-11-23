@@ -18,16 +18,14 @@
 </nav>
 <br>
 <br>
-<div class="container">
-<div class="boardcontainer">
-<h4> Boards </h4>
 <br>
-<div class="boardlist">
-  {% for board in boards %}
-  <a href="/{{board[1]}}">{{board[1]}} - {{board[2]}}</a>
-  {% endfor %}
-</div>
-</div>
-</div>
-</body>
+<center>
+<button class="waves-effect waves-light btn-large" onclick="goBack()">Return to Previous page</button>
 
+<script>
+function goBack() {
+    window.history.back();
+}
+</script>
+</body>
+</html>

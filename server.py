@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, g
+from flask import Flask, request, render_template, g, session, redirect, url_for 
 from werkzeug.utils import secure_filename
 import sqlite3
 import datetime, os, random
@@ -48,6 +48,21 @@ def create_new_reply(request, reply_id):
     cur.close()
     return cur.lastrowid
 
+def create_new_board(request):
+    query = ''' INSERT INTO boards(board_short_name, board_description) values (?,?) '''
+    cur = get_db().cursor()
+    cur.execute(query)
+    get_db().commit()
+    cur.close
+    return cur.lastrowid
+
+@app.route('/admin/post_newboard', methods = ['POST'])
+def post_newboard():
+    if request.form.get('boardname'):
+         post = (request.form.get('boardname'),request.form.get('description'))
+         print create_new_board(post)
+    return 'posted'
+
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
@@ -66,7 +81,7 @@ def post(board):
         now = datetime.datetime.now()
         post = (newfilename,request.form.get('name'),now.isoformat(),board,request.form.get('post_text'))
         print create_new_post(post)
-    return 'posted'
+    return render_template('back.html')  
 
 @app.route('/<board>/post_reply/<post_id>', methods = ['POST'])
 def post_reply(board,post_id):
@@ -82,7 +97,7 @@ def post_reply(board,post_id):
         now = datetime.datetime.now()
         post = (newfilename,request.form.get('name'),now.isoformat(),board,request.form.get('post_text'),post_id)
         print create_new_reply(post,post_id)
-    return 'posted'
+    return render_template('back.html')
 
 @app.route('/')
 def index():
@@ -100,4 +115,17 @@ def reply(board, post_id):
     replies = query_db('select * from replies where replying_to = "{}"'.format(post_id))
     print replies
     return render_template('reply.html', post=post[0], replies=replies, board=board)
-   
+ 
+@app.route('/admin', methods=['GET', 'POST'])
+def admin():
+    error = None
+    if request.method == 'POST':
+        if request.form['username'] != 'admin' or request.form['password'] != 'admin':
+            error = 'Invalid Credentials. Please try again.'
+        else:
+            return render_template('admin.html', post=post, board=board, admin=admin)
+    return render_template('login.html', error=error)
+
+@app.errorhandler(404)
+def page_not_found(error):
+    return render_template('error.html'), 404
